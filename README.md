@@ -79,6 +79,54 @@ protected $except = [
 
 ## Usage
 
+Stripe will send out webhooks for several event types. You can find the [full list of events types](https://stripe.com/docs/api#event_types) in the Stripe documentation.
+
+Stripe will sign all requests hitting the webhook url of your app. This package will automatically verify if the signature is valid. If it is not, the request was probably not sent by Stripe.
+
+Unless something goes terribly wrong, this package will always respond with a `200` to webhook requests. Sending a `200` will prevent Stripe from resending the same event over and over again. All webhook requests with a valid signature will be logged in the `webhook_calls` table. The table has a `payload` column where the entire payload of the incoming webhook is saved.
+
+If the signature is not valid, the request will not be logged in the `webhook_calls` table but a `Spatie\StripeWebhooks\WebhookFailed` exception will be thrown.
+If something goes wrong during the webhook request the thrown exception will be saved in the `exception` column. In that case the controller will send a `500` instead of `200`.
+
+There are two ways this package enables you to handle webhook requests: you can opt to queue a job or listen to the events the package will fire.
+
+### Handling webhook requests using jobs
+If you want to do something when a specific event type comes in you can define a job that does the work. Here's an example of such a job:
+
+```php
+<?php
+
+namespace App\Jobs\StripeWebhooks;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Spatie\WebhookClient\Models\WebhookCall;
+
+class HandleChargeableSource implements ShouldQueue
+{
+    use InteractsWithQueue, Queueable, SerializesModels;
+
+    /** @var \Spatie\WebhookClient\Models\WebhookCall */
+    public $webhookCall;
+
+    public function __construct(WebhookCall $webhookCall)
+    {
+        $this->webhookCall = $webhookCall;
+    }
+
+    public function handle()
+    {
+        // do your work here
+
+        // you can access the payload of the webhook call with `$this->webhookCall->payload`
+    }
+}
+```
+
+We highly recommend that you make this job queueable, because this will minimize the response time of the webhook requests. This allows you to handle more stripe webhook requests and avoid timeouts.
+
 ``` php
 // Usage description here
 ```
