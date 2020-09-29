@@ -16,10 +16,9 @@ class LaravelFlutterwaveSignatureValidator implements SignatureValidator
 
         try {
             // Webhook::constructEvent($request->getContent(), $signature, $secret);
-            if($signature === $secret){
+            if ($signature === $secret) {
                 return true;
             }
-            
         } catch (Exception $exception) {
             return false;
         }
