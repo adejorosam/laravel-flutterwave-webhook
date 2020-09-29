@@ -1,0 +1,55 @@
+{
+    "name": "adejorosam/laravel-flutterwave-webhook",
+    "description": "Handle Flutterwave Webhooks in a Laravel application",
+    "keywords": [
+        "adejorosam",
+        "laravel-flutterwave-webhook"
+    ],
+    "homepage": "https://github.com/adejorosam/laravel-flutterwave-webhook",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Samson Adejoro",
+            "email": "samsonadejoro@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "spatie/laravel-webhook-client": "^2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adejorosam\\LaravelFlutterwaveWebhook\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Adejorosam\\LaravelFlutterwaveWebhook\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Adejorosam\\LaravelFlutterwaveWebhook\\LaravelFlutterwaveWebhookServiceProvider"
+            ],
+            "aliases": {
+                "LaravelFlutterwaveWebhook": "Adejorosam\\LaravelFlutterwaveWebhook\\LaravelFlutterwaveWebhookFacade"
+            }
+        }
+    }
+}
