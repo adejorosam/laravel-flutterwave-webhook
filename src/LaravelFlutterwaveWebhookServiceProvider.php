@@ -2,8 +2,8 @@
 
 namespace Adejorosam\LaravelFlutterwaveWebhook;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
 
 class LaravelFlutterwaveWebhookServiceProvider extends ServiceProvider
 {
@@ -12,18 +12,16 @@ class LaravelFlutterwaveWebhookServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
-
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('laravel-flutterwave-webhook.php'),
             ], 'config');
         }
 
-            Route::macro('flutterwaveWebhooks', function ($url) {
-                return Route::post($url, '\Adejorosam\LaravelFlutterwaveWebhook\LaravelFlutterwaveWebhookController');
-            });
-        }
+        Route::macro('flutterwaveWebhooks', function ($url) {
+            return Route::post($url, '\Adejorosam\LaravelFlutterwaveWebhook\LaravelFlutterwaveWebhookController');
+        });
+    }
         
 
     /**
@@ -33,6 +31,5 @@ class LaravelFlutterwaveWebhookServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-flutterwave-webhook');
-
     }
 }

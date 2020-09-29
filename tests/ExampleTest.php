@@ -2,12 +2,11 @@
 
 namespace Adejorosam\LaravelFlutterwaveWebhook\Tests;
 
-use Orchestra\Testbench\TestCase;
 use Adejorosam\LaravelFlutterwaveWebhook\LaravelFlutterwaveWebhookServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class ExampleTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [LaravelFlutterwaveWebhookServiceProvider::class];
