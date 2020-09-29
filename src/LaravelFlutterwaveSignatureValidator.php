@@ -12,7 +12,7 @@ class LaravelFlutterwaveSignatureValidator implements SignatureValidator
     public function isValid(Request $request, WebhookConfig $config): bool
     {
         $signature = $request->header('verif-hash');
-        $secret = $config->secret_hash;
+        $secret = $config->signingSecret;
 
         try {
             // Webhook::constructEvent($request->getContent(), $signature, $secret);
