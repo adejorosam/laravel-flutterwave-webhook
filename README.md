@@ -79,6 +79,16 @@ protected $except = [
 
 ## Usage
 
+Flutterwave will send out webhooks for several event types. You can find the [full list of events types] in the Flutterwave documentation.
+
+Flutterwave will sign all requests hitting the webhook url of your app. This package will automatically verify if the signature is valid. If it is not, the request was probably not sent by Flutterwave.
+
+Unless something goes terribly wrong, this package will always respond with a `200` to webhook requests. Sending a `200` will prevent Flutterwave from resending the same event over and over again. All webhook requests with a valid signature will be logged in the `webhook_calls` table. The table has a `payload` column where the entire payload of the incoming webhook is saved.
+
+If the signature is not valid, the request will not be logged in the `webhook_calls` table but a `Adejorosam\LaravelWebhooks\WebhookFailed` exception will be thrown.
+If something goes wrong during the webhook request the thrown exception will be saved in the `exception` column. In that case the controller will send a `500` instead of `200`.
+
+
 ``` php
 // Usage description here
 ```
