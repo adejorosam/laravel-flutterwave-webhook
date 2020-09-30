@@ -1,8 +1,6 @@
 # Handle Flutterwave Webhooks in a Laravel application
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/adejorosam/laravel-flutterwave-webhook.svg?style=flat-square)](https://packagist.org/packages/adejorosam/laravel-flutterwave-webhook)
-[![Build Status](https://img.shields.io/travis/adejorosam/laravel-flutterwave-webhook/master.svg?style=flat-square)](https://travis-ci.org/adejorosam/laravel-flutterwave-webhook)
-[![Quality Score](https://img.shields.io/scrutinizer/g/adejorosam/laravel-flutterwave-webhook.svg?style=flat-square)](https://scrutinizer-ci.com/g/adejorosam/laravel-flutterwave-webhook)
 [![Total Downloads](https://img.shields.io/packagist/dt/adejorosam/laravel-flutterwave-webhook.svg?style=flat-square)](https://packagist.org/packages/adejorosam/laravel-flutterwave-webhook)
 
 [Flutterwave](https://flutterwave.com/) can notify your application about various events via webhooks. This package can
@@ -26,7 +24,7 @@ The service provider will automatically register itself.
 
 You must publish the config file with:
 ```bash
-php artisan vendor:publish --provider="adejorosam\LaravelFlutterwaveWebhook\LaravelFlutterwaveWebhookServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Adejorosam\LaravelFlutterwaveWebhook\LaravelFlutterwaveWebhookServiceProvider" --tag="config"
 ```
 
 This is the contents of the config file that will be published at `config/flutterwave-webhooks.php`:
@@ -85,7 +83,7 @@ Flutterwave will sign all requests hitting the webhook url of your app. This pac
 
 Unless something goes terribly wrong, this package will always respond with a `200` to webhook requests. Sending a `200` will prevent Flutterwave from resending the same event over and over again. All webhook requests with a valid signature will be logged in the `webhook_calls` table. The table has a `payload` column where the entire payload of the incoming webhook is saved.
 
-If the signature is not valid, the request will not be logged in the `webhook_calls` table but a `\LaravelWebhooks\WebhookFailed` exception will be thrown.
+If the signature is not valid, the request will not be logged in the `webhook_calls` table but a `Adejorosam\LaravelWebhooks\WebhookFailed` exception will be thrown.
 If something goes wrong during the webhook request the thrown exception will be saved in the `exception` column. In that case the controller will send a `500` instead of `200`.
 
 
