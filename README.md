@@ -125,10 +125,6 @@ class ProcessFlutterwaveWebhook extends ProcessWebhookJob
 You should specify the class name of your job in the `process_webhook_job` of the `webhook-client` config file.
 
 
-``` php
-// Usage description here
-```
-
 ### Testing
 
 ``` bash
