@@ -86,6 +86,41 @@ Unless something goes terribly wrong, this package will always respond with a `2
 If the signature is not valid, the request will not be logged in the `webhook_calls` table but a `Adejorosam\LaravelWebhooks\WebhookFailed` exception will be thrown.
 If something goes wrong during the webhook request the thrown exception will be saved in the `exception` column. In that case the controller will send a `500` instead of `200`.
 
+### Storing and processing webhooks
+
+After the signature is validated and the webhook profile has determined that the request should be processed, the package will store and process the request.
+
+The request will first be stored in the `webhook_calls` table. This is done using the `WebhookCall` model.
+
+Should you want to customize the table name or anything on the storage behavior, you can let the package use an alternative model. A webhook storing model can be specified in the `webhook_model`. Make sure you model extends `Spatie\WebhookClient\Models\WebhookCall`.
+
+You can change how the webhook is stored by overriding the `storeWebhook` method of `WebhookCall`. In the `storeWebhook` method you should return a saved model.
+
+Next, the newly created `WebhookCall` model will be passed to a queued job that will process the request. Any class that extends `\Spatie\WebhookClient\ProcessWebhookJob` is a valid job. Here's an example:
+
+```php
+<?php
+namespace Adejorosam\LaravelFlutterwaveWebhook;
+
+use \Spatie\WebhookClient\ProcessWebhookJob;
+
+//The class extends "ProcessWebhookJob" class as that is the class
+//that will handle the job of processing our webhook before we have
+//access to it.
+
+
+class ProcessFlutterwaveWebhook extends ProcessWebhookJob
+{
+    public function handle()
+    {
+        $data = json_decode($this->webhookCall, true);
+        //Do something with great with this!
+       http_response_code(200); //Acknowledge you received the response
+    }
+}
+```
+
+You should specify the class name of your job in the `process_webhook_job` of the `webhook-client` config file.
 
 
 ``` php
@@ -118,7 +153,3 @@ If you discover any security related issues, please email samsonadejoro@gmail.co
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
