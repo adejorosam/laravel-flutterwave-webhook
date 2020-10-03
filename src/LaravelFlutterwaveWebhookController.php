@@ -8,7 +8,7 @@ use Spatie\WebhookClient\WebhookConfig;
 use Spatie\WebhookClient\WebhookProcessor;
 use Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile;
 
-class FlutterwaveWebhookController
+class LaravelFlutterwaveWebhookController
 {
     public function __invoke(Request $request, string $configKey = null)
     {
