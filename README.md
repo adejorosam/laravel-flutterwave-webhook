@@ -43,7 +43,7 @@ return [
      * The classname of the model to be used. The class should equal or extend
      * \Spatie\WebhookClient\ProcessWebhookJob.
     */
-    'model' => Adejorosam\LaravelFlutterwaveWebhook\ProcessFlutterwaveWebhookJobs::class,,
+    'process_webhook_job' => '',
 ];
 
 ```

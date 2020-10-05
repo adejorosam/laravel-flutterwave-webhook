@@ -15,13 +15,13 @@ class LaravelFlutterwaveWebhookController
         $webhookConfig = new WebhookConfig([
             'name' => 'flutterwave',
             'signing_secret' => ($configKey) ?
-                config('flutterwave-webhook.signing_secret_'.$configKey) :
-                config('flutterwave-webhook.signing_secret'),
+                config('laravel-flutterwave-webhook.signing_secret_'.$configKey) :
+                config('laravel-flutterwave-webhook.signing_secret'),
             'signature_header_name' => 'verif-hash',
             'signature_validator' => LaravelFlutterwaveSignatureValidator::class,
             'webhook_profile' => ProcessEverythingWebhookProfile::class,
             'webhook_model' => WebhookCall::class,
-            'process_webhook_job' => config('flutterwave-webhook.model'),
+            'process_webhook_job' => config('laravel-flutterwave-webhook.model'),
         ]);
 
         (new WebhookProcessor($request, $webhookConfig))->process();

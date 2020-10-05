@@ -22,7 +22,5 @@ class LaravelFlutterwaveSignatureValidator implements SignatureValidator
         } catch (Exception $exception) {
             return false;
         }
-
-        // return true;
     }
 }
