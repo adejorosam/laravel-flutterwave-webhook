@@ -21,7 +21,7 @@ class LaravelFlutterwaveWebhookController
             'signature_validator' => LaravelFlutterwaveSignatureValidator::class,
             'webhook_profile' => ProcessEverythingWebhookProfile::class,
             'webhook_model' => WebhookCall::class,
-            'process_webhook_job' => config('laravel-flutterwave-webhook.model'),
+            'process_webhook_job' => config('laravel-flutterwave-webhook.process_webhook_job'),
         ]);
 
         (new WebhookProcessor($request, $webhookConfig))->process();
