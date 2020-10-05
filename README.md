@@ -1,7 +1,6 @@
 # Handle Flutterwave Webhooks in a Laravel application
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/adejorosam/laravel-flutterwave-webhook.svg?style=flat-square)](https://packagist.org/packages/adejorosam/laravel-flutterwave-webhook)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/adejorosam/laravel-flutterwave-webhook/run-tests?label=tests)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/adejorosam/laravel-flutterwave-webhook.svg?style=flat-square)](https://packagist.org/packages/adejorosam/laravel-flutterwave-webhook)![run-tests](https://github.com/adejorosam/laravel-flutterwave-webhook/workflows/run-tests/badge.svg)
 ![Check & fix styling](https://github.com/adejorosam/laravel-flutterwave-webhook/workflows/Check%20&%20fix%20styling/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/adejorosam/laravel-flutterwave-webhook.svg?style=flat-square)](https://packagist.org/packages/adejorosam/laravel-flutterwave-webhook)
 
